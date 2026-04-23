@@ -1,0 +1,106 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Perfiles de usuarios autenticados.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "display_name": { "type": "string" },
+        "email": { "type": "string" },
+        "photo_url": { "type": "string" },
+        "is_admin": { "type": "boolean" },
+        "biography_status": { "type": "string", "enum": ["pending", "completed"] },
+        "birth_date": { "type": "string" },
+        "onboarding_completed": { "type": "boolean" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "is_admin"]
+    },
+    "Song": {
+      "title": "Song",
+      "description": "Biblioteca de canciones para la cata musical.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "artist": { "type": "string" },
+        "youtube_url": { "type": "string" },
+        "youtube_video_id": { "type": "string" },
+        "youtube_thumbnail_url": { "type": "string" },
+        "cuadrante_principal": { "type": "string", "enum": ["abraza", "prende", "eleva", "revela"] },
+        "descripcion_breve": { "type": "string" },
+        "estado": { "type": "string", "enum": ["active", "inactive"] },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "title", "artist", "youtube_video_id", "cuadrante_principal", "estado"]
+    },
+    "TestSession": {
+      "title": "TestSession",
+      "description": "Sesiones de cata musical completadas por los usuarios.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "uid": { "type": "string" },
+        "dominant_quadrant": { "type": "string" },
+        "answers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "song_id": { "type": "string" },
+              "score": { "type": "number" },
+              "cuadrante_principal": { "type": "string" }
+            }
+          }
+        },
+        "score_summary": {
+          "type": "object",
+          "properties": {
+            "abraza": { "type": "number" },
+            "prende": { "type": "number" },
+            "eleva": { "type": "number" },
+            "revela": { "type": "number" }
+          }
+        },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "dominant_quadrant", "answers", "created_at"]
+    },
+    "Result": {
+      "title": "Result",
+      "description": "Manuscritos finales generados a partir de las sesiones.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "session_id": { "type": "string" },
+        "uid": { "type": "string" },
+        "dominant_quadrant": { "type": "string" },
+        "short_diagnosis": { "type": "string" },
+        "long_reading": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["session_id", "uid", "dominant_quadrant", "short_diagnosis", "long_reading", "created_at"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": {
+      "schema": "User",
+      "description": "Almacenamiento de perfiles de usuario."
+    },
+    "/songs/{songId}": {
+      "schema": "Song",
+      "description": "Biblioteca editorial de canciones."
+    },
+    "/test_sessions/{sessionId}": {
+      "schema": "TestSession",
+      "description": "Historial de catas realizadas."
+    },
+    "/results/{resultId}": {
+      "schema": "Result",
+      "description": "Lecturas editoriales persistentes."
+    }
+  }
+}

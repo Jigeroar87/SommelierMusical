@@ -1,0 +1,86 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- Helpers ---
+    function isSignedIn() { return request.auth != null; }
+    function isEmailVerified() { return request.auth.token.email_verified == true; }
+    function isOwner(uid) { return isSignedIn() && request.auth.uid == uid; }
+    function isAdmin() { return isSignedIn() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.is_admin == true; }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+
+    // --- Entidades ---
+
+    match /users/{uid} {
+      function isValidUser(data) {
+        return data.uid is string && data.uid == uid &&
+               data.email is string && data.email.size() <= 256 &&
+               data.is_admin is bool &&
+               (data.display_name is string && data.display_name.size() <= 256 || !('display_name' in data)) &&
+               (data.photo_url is string && data.photo_url.size() <= 1024 || !('photo_url' in data)) &&
+               (data.biography_status is string && data.biography_status in ['pending', 'completed'] || !('biography_status' in data)) &&
+               (data.birth_date is string && data.birth_date.size() <= 20 || !('birth_date' in data)) &&
+               (data.onboarding_completed is bool || !('onboarding_completed' in data)) &&
+               (data.created_at is timestamp || !('created_at' in data)) &&
+               (data.updated_at is timestamp || !('updated_at' in data));
+      }
+
+      allow get: if isOwner(uid) || isAdmin();
+      allow create: if isOwner(uid) && isValidUser(incoming()) && incoming().is_admin == false;
+      allow update: if isOwner(uid) && isValidUser(incoming()) && 
+                    (
+                      // Entorno de onboarding/actualización de perfil
+                      incoming().diff(existing()).affectedKeys().hasOnly(['display_name', 'photo_url', 'updated_at', 'biography_status', 'birth_date', 'onboarding_completed'])
+                    ) &&
+                    incoming().is_admin == existing().is_admin;
+    }
+
+    match /songs/{songId} {
+      function isValidSong(data) {
+        return data.id is string && data.title is string && data.title.size() <= 200 &&
+               data.artist is string && data.artist.size() <= 200 &&
+               data.youtube_video_id is string && data.youtube_video_id.size() <= 20 &&
+               data.estado in ['active', 'inactive'] &&
+               data.cuadrante_principal in ['abraza', 'prende', 'eleva', 'revela'];
+      }
+
+      allow get: if true;
+      allow list: if true; // No delegamos seguridad al cliente: filtramos por estado en la app, pero permitimos lectura pública para la cata.
+      allow write: if isAdmin() && isValidSong(incoming());
+    }
+
+    match /test_sessions/{sessionId} {
+      function isValidSession(data) {
+        return data.uid is string && data.uid == request.auth.uid &&
+               data.dominant_quadrant is string &&
+               data.answers is list && data.answers.size() <= 10;
+      }
+
+      allow get: if isOwner(existing().uid);
+      allow list: if isSignedIn() && resource.data.uid == request.auth.uid;
+      allow create: if isOwner(incoming().uid) && isValidSession(incoming());
+      allow update, delete: if false;
+    }
+
+    match /results/{resultId} {
+      function isValidResult(data) {
+        return data.uid is string && data.uid == request.auth.uid &&
+               data.session_id is string &&
+               data.dominant_quadrant is string &&
+               data.short_diagnosis is string && data.short_diagnosis.size() <= 1000 &&
+               data.long_reading is string && data.long_reading.size() <= 10000;
+      }
+
+      allow get: if isOwner(existing().uid);
+      allow list: if isSignedIn() && resource.data.uid == request.auth.uid;
+      allow create: if isOwner(incoming().uid) && isValidResult(incoming());
+      allow update, delete: if false;
+    }
+  }
+}
