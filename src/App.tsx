@@ -12,6 +12,10 @@ import { Result } from './pages/Result';
 import { Onboarding } from './pages/Onboarding';
 import { Profile } from './pages/Profile';
 import { Admin } from './pages/Admin';
+import { SongLibrary } from './pages/SongLibrary';
+import { SongDetail } from './pages/SongDetail';
+import { SongTest } from './pages/SongTest';
+import { RequestSong } from './pages/RequestSong';
 import { TestProvider, useTest } from './context/TestContext';
 
 import { Loader2 } from 'lucide-react';
@@ -51,6 +55,38 @@ function AppContent() {
             element={
               <ProtectedRoute>
                 <Onboarding />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/library" 
+            element={
+              <ProtectedRoute>
+                <SongLibrary />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/request-song" 
+            element={
+              <ProtectedRoute>
+                <RequestSong />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/songs/:slug/test" 
+            element={
+              <ProtectedRoute>
+                <SongTest />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/songs/:slug" 
+            element={
+              <ProtectedRoute>
+                <SongDetail />
               </ProtectedRoute>
             } 
           />

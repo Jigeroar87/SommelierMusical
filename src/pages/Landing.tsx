@@ -66,18 +66,29 @@ export const Landing: React.FC = () => {
 
         {/* Action Controls */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 2 }}
-          className="flex flex-col items-center gap-14 w-full pt-4"
+           initial={{ opacity: 0 }}
+           animate={{ opacity: 1 }}
+           transition={{ delay: 0.8, duration: 2 }}
+           className="flex flex-col items-center gap-14 w-full pt-4"
         >
-          <Button 
-            size="lg" 
-            onClick={handleStart} 
-            className="w-full md:w-auto min-w-[340px] px-16 transition-all hover:tracking-[0.45em] text-sm py-6 bg-[#C8A96B] text-[#140F12]"
-          >
-            {isLoggedIn ? (currentTestAnswers.length > 0 ? 'REANUDAR CATA' : 'NUEVA CATA MUSICAL') : 'INICIAR LA EXPERIENCIA'}
-          </Button>
+          <div className="flex flex-col md:flex-row items-center gap-6 w-full justify-center">
+            <Button 
+              size="lg" 
+              onClick={handleStart} 
+              className="w-full md:w-auto min-w-[300px] px-16 transition-all hover:tracking-[0.45em] text-sm py-6 bg-[#C8A96B] text-[#140F12]"
+            >
+              {isLoggedIn ? (currentTestAnswers.length > 0 ? 'REANUDAR CATA' : 'NUEVA CATA MUSICAL') : 'INICIAR LA EXPERIENCIA'}
+            </Button>
+            
+            <Button 
+              size="lg" 
+              variant="outline"
+              onClick={() => navigate('/library')} 
+              className="w-full md:w-auto min-w-[300px] px-16 border-[#C8A96B]/20 text-[#C8A96B] hover:bg-[#C8A96B]/5 transition-all text-sm py-6"
+            >
+              EXPLORAR LA CAVA
+            </Button>
+          </div>
           
           <div className="flex flex-wrap justify-center gap-12 items-center">
             {isLoggedIn && (
