@@ -111,12 +111,54 @@ export const songService = {
     return { song, questions };
   },
 
+  async validateSongRequest(request: { requested_title: string; requested_artist: string }) {
+    console.log('[songService] validateSongRequest:', request);
+    try {
+      const response = await fetch('https://n8n.jimmygeorge.cloud/webhook/validate-song-request', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(request),
+      });
+
+      const rawText = await response.text();
+      console.log('[songService] validateSongRequest status:', response.status);
+      console.log('[songService] validateSongRequest raw response:', rawText);
+
+      if (!response.ok) {
+        throw new Error(rawText || `Error al validar la canción (Status: ${response.status})`);
+      }
+
+      if (!rawText || rawText.trim() === "") {
+        throw new Error('No se recibió respuesta del validador de canción.');
+      }
+
+      try {
+        return JSON.parse(rawText);
+      } catch (parseError) {
+        console.error('[songService] JSON parse error. Raw text:', rawText);
+        throw new Error('El validador respondió en un formato no válido.');
+      }
+    } catch (error) {
+      console.error('[songService] validateSongRequest error:', error);
+      throw error;
+    }
+  },
+
   async requestSong(request: {
     requested_title: string;
     requested_artist: string;
     requested_url?: string;
     user_note?: string;
     user_id?: string;
+    canonical_title?: string;
+    canonical_artist?: string;
+    normalized_slug?: string;
+    validation_status?: string;
+    validation_confidence?: number;
+    validation_candidates?: any;
+    matched_song_id?: string;
   }) {
     console.log('[songService] requestSong payload:', request);
 
@@ -126,7 +168,14 @@ export const songService = {
       requested_url: request.requested_url || null,
       user_note: request.user_note || null,
       user_id: request.user_id || null,
-      status: 'pending'
+      status: 'pending',
+      canonical_title: request.canonical_title || null,
+      canonical_artist: request.canonical_artist || null,
+      normalized_slug: request.normalized_slug || null,
+      validation_status: request.validation_status || null,
+      validation_confidence: request.validation_confidence || null,
+      validation_candidates: request.validation_candidates || null,
+      matched_song_id: request.matched_song_id || null
     };
 
     const { error } = await supabase

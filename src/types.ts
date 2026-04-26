@@ -40,7 +40,33 @@ export interface SongRequest {
   requested_url?: string;
   user_note?: string;
   status: 'pending' | 'processing' | 'completed' | 'failed';
+  canonical_title?: string;
+  canonical_artist?: string;
+  normalized_slug?: string;
+  validation_status?: string;
+  validation_confidence?: number;
+  validation_candidates?: any;
+  matched_song_id?: string;
   created_at: string;
+}
+
+export interface SongValidationResponse {
+  input_title: string;
+  input_artist: string;
+  requested_title: string;
+  requested_artist: string;
+  canonical_title: string;
+  canonical_artist: string;
+  normalized_slug: string;
+  confidence: number;
+  validation_status: 'exact_match' | 'corrected' | 'needs_review' | 'rejected';
+  reason: string;
+  candidates?: Array<{
+    title: string;
+    artist: string;
+    confidence: number;
+    reason: string;
+  }>;
 }
 
 export interface User {
