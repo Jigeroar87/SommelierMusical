@@ -77,7 +77,7 @@ export const Test: React.FC = () => {
       <div className="fixed left-8 top-1/2 -translate-y-1/2 hidden xl:flex flex-col gap-12 z-30 opacity-20">
           <div className="h-24 w-[1px] bg-[#C8A96B]/10 relative">
             <div 
-              className="absolute top-0 left-0 w-full bg-[#C8A96B]/60 transition-all duration-1000 ease-in-out"
+              className="absolute top-0 left-0 w-full bg-[#C8A96B]/60 transition-all duration-400 ease-in-out"
               style={{ height: `${((currentIndex + 1) / songs.length) * 100}%` }}
             />
           </div>
@@ -126,7 +126,7 @@ export const Test: React.FC = () => {
                     <button
                       key={score}
                       onClick={() => setSelectedScore(score)}
-                      className={`w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center font-serif italic text-2xl transition-all duration-700 border ${selectedScore === score ? 'bg-[#C8A96B] text-[#140F12] border-[#C8A96B] shadow-[0_0_40px_rgba(200,169,107,0.3)] scale-110' : 'bg-white/[0.01] border-[#C8A96B]/10 text-[#F3EBDD]/60 hover:border-[#C8A96B]/30 hover:bg-white/[0.03]'}`}
+                      className={`w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center font-serif italic text-2xl transition-all duration-300 border ${selectedScore === score ? 'bg-[#C8A96B] text-[#140F12] border-[#C8A96B] shadow-[0_0_40px_rgba(200,169,107,0.3)] scale-110' : 'bg-white/[0.01] border-[#C8A96B]/10 text-[#F3EBDD]/60 hover:border-[#C8A96B]/30 hover:bg-white/[0.03]'}`}
                     >
                       {score}
                     </button>

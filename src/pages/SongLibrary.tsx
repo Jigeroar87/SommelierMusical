@@ -123,9 +123,9 @@ export function SongLibrary() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ delay: idx * 0.08, duration: 0.8 }}
+                  transition={{ delay: idx * 0.03, duration: 0.4 }}
                   onClick={() => navigate(`/songs/${song.slug}`)}
-                  className="group relative glass p-10 flex flex-col gap-10 cursor-pointer hover:border-[#C8A96B]/40 transition-all duration-700 overflow-hidden"
+                  className="group relative glass p-10 flex flex-col gap-10 cursor-pointer hover:border-[#C8A96B]/40 transition-all duration-300 overflow-hidden"
                 >
                   <div className="glossy-overlay opacity-30 group-hover:opacity-60 transition-opacity" />
                   

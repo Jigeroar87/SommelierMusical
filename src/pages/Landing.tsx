@@ -29,7 +29,7 @@ export const Landing: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
           className="space-y-6"
         >
           <div className="h-px w-16 bg-[#C8A96B]/30 mx-auto" />
@@ -42,7 +42,7 @@ export const Landing: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 2, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ delay: 0.1, duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="space-y-16"
         >
           <h1 className="text-7xl md:text-[11rem] font-serif italic font-extralight leading-[0.8] tracking-tight">
@@ -68,7 +68,7 @@ export const Landing: React.FC = () => {
         <motion.div
            initial={{ opacity: 0 }}
            animate={{ opacity: 1 }}
-           transition={{ delay: 1, duration: 2 }}
+           transition={{ delay: 0.4, duration: 1.2 }}
            className="flex flex-col items-center gap-14 w-full pt-4"
         >
           <div className="flex flex-col md:flex-row items-center gap-6 w-full justify-center">

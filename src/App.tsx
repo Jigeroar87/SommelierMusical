@@ -19,6 +19,7 @@ import { RequestSong } from './pages/RequestSong';
 import { TestProvider, useTest } from './context/TestContext';
 
 import { Loader2 } from 'lucide-react';
+import { Navigation } from './components/Navigation';
 
 // Auth guard using context
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -47,6 +48,7 @@ function AppContent() {
   return (
     <Router>
       <div className="min-h-screen text-[#F3EBDD] font-sans selection:bg-[#C8A96B] selection:text-white relative overflow-hidden">
+        <Navigation />
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />

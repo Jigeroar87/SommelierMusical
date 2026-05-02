@@ -22,7 +22,10 @@ export const geminiService = {
         Eres un asistente de curaduría para "Sommelier Musical". 
         Tu tarea es encontrar videos de YouTube específicos basados en una búsqueda de música (Canción y Artista).
         
-        Debes devolver un JSON con una lista de los 3 mejores resultados que encuentres.
+        Debes devolver un JSON con una lista de los 5 mejores resultados que encuentres.
+        IMPORTANTE: Incluye versiones variadas: Video Oficial, Audio Oficial y Lyric Video. 
+        Esto es para asegurar que si uno tiene restricciones de reproducción externa (embedding), podamos intentar con el siguiente.
+        
         Cada resultado DEBE tener:
         - title: Nombre de la canción.
         - artist: Nombre del artista.

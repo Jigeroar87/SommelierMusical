@@ -7,6 +7,7 @@ interface YouTubePlayerProps {
   videoId: string;
   isPlaying: boolean;
   onStateChange?: (isPlaying: boolean) => void;
+  onError?: (errorCode: number) => void;
   thumbnailUrl: string;
 }
 
@@ -14,6 +15,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   videoId, 
   isPlaying, 
   onStateChange,
+  onError,
   thumbnailUrl 
 }) => {
   const playerRef = useRef<YTPlayer | null>(null);
@@ -23,16 +25,19 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   const opts: YouTubeProps['opts'] = {
     height: '100%',
     width: '100%',
+    host: 'https://www.youtube-nocookie.com',
     playerVars: {
       autoplay: 0,
-      controls: 1, // Visible by default for better UX in preview
+      controls: 1,
       modestbranding: 1,
       rel: 0,
       showinfo: 0,
       iv_load_policy: 3,
-      fs: 1, // Habilitado para permitir pantalla completa
+      fs: 1,
       disablekb: 0,
-      origin: typeof window !== 'undefined' ? window.location.origin : undefined,
+      enablejsapi: 1,
+      widget_referrer: window.location.href,
+      origin: window.location.origin,
     },
   };
 
@@ -78,11 +83,13 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   };
 
   const onPlayerError = (event: any) => {
-    console.error("YouTube Error Details:", event.data);
+    const errorCode = event.data;
+    console.error("YouTube Error Details:", errorCode);
     // 101/150 usually means restricted embed
     setError(true);
     setIsReady(true);
     if (onStateChange) onStateChange(false);
+    if (onError) onError(errorCode);
   };
 
   return (

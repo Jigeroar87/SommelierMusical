@@ -12,6 +12,7 @@ export interface Song {
   intensity?: number;
   tags?: string[];
   youtube_url?: string;
+  youtube_video_id?: string;
   spotify_url?: string;
   apple_music_url?: string;
   edited_video_url?: string;
