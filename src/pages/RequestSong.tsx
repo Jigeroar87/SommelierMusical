@@ -84,7 +84,7 @@ export function RequestSong() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex flex-col bg-[#140F12] relative overflow-hidden">
+      <div className="min-h-screen flex flex-col relative overflow-hidden">
         <div className="atmosphere-luxury" />
         <div className="halo-light" />
         
@@ -122,7 +122,7 @@ export function RequestSong() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#140F12] relative overflow-hidden">
+    <div className="min-h-screen flex flex-col relative overflow-hidden">
       <div className="atmosphere-luxury" />
       <div className="halo-light" />
 

@@ -16,28 +16,28 @@ export const QUADRANTS_DATA = {
   abraza: {
     name: 'Te Abraza',
     emoji: '🫂',
-    color: '#4f46e5',
+    color: '#8B2E34', // Deep Rosewood
     description: 'Sostiene tu nostalgia, valida tu herida y acompaña tu intimidad.',
     universe: ['amor', 'ruptura', 'nostalgia', 'apego', 'validación']
   },
   prende: {
     name: 'Te Prende',
     emoji: '🔥',
-    color: '#ef4444',
+    color: '#C8A96B', // Sommelier Gold
     description: 'Activa el cuerpo, el deseo y la calle. Energía roja y picardía.',
     universe: ['ritmo', 'cuerpo', 'deseo', 'seducción', 'calle']
   },
   eleva: {
     name: 'Te Eleva',
     emoji: '✨',
-    color: '#f59e0b',
+    color: '#E2B05E', // Warm Honey Gold
     description: 'Himnos que te levantan y expanden. Celebración y energía solar.',
     universe: ['himnos', 'hype', 'expansión', 'celebración', 'ascenso']
   },
   revela: {
     name: 'Te Revela',
     emoji: '🔮',
-    color: '#8b5cf6',
+    color: '#6D4C82', // Muted Plum
     description: 'Cuestiona tu identidad y revela tu verdad profunda y legado.',
     universe: ['identidad', 'legado', 'verdad', 'crisis', 'profundidad']
   }

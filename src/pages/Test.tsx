@@ -75,49 +75,58 @@ export const Test: React.FC = () => {
 
       {/* Sidebar - Minimalist markers */}
       <div className="fixed left-8 top-1/2 -translate-y-1/2 hidden xl:flex flex-col gap-12 z-30 opacity-20">
-        <div className="h-24 w-[1px] bg-[#C8A96B]/30 relative">
-          <div 
-            className="absolute top-0 left-0 w-full bg-[#C8A96B] transition-all duration-700"
-            style={{ height: `${((currentIndex + 1) / songs.length) * 100}%` }}
-          />
-        </div>
-        <div className="text-[10px] tracking-[0.5em] [writing-mode:vertical-lr] uppercase text-[#F3EBDD]/40 font-bold">
-          Lectura {currentIndex + 1} / {songs.length}
-        </div>
+          <div className="h-24 w-[1px] bg-[#C8A96B]/10 relative">
+            <div 
+              className="absolute top-0 left-0 w-full bg-[#C8A96B]/60 transition-all duration-1000 ease-in-out"
+              style={{ height: `${((currentIndex + 1) / songs.length) * 100}%` }}
+            />
+          </div>
+          <div className="text-[9px] tracking-[0.7em] [writing-mode:vertical-lr] uppercase text-[#C8A96B]/40 font-bold">
+            Lectura {currentIndex + 1} • {songs.length}
+          </div>
       </div>
 
       <div className="w-full max-w-7xl mx-auto flex-grow flex flex-col gap-16 relative z-10">
-        <header className="space-y-4">
-          <h1 className="text-6xl md:text-8xl font-serif italic text-[#C8A96B] leading-tight tracking-tighter">
-            {currentSong.title}
-          </h1>
-          <p className="text-xl md:text-2xl font-serif italic text-[#F3EBDD] opacity-90">
-            {currentSong.artist} · {currentSong.title}
-          </p>
+        <header className="space-y-6 text-center max-w-4xl mx-auto">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="micro-label"
+          >
+            Cata Inicial
+          </motion.h2>
+          <div className="space-y-2">
+            <h1 className="text-6xl md:text-8xl font-serif italic text-[#F3EBDD] leading-tight tracking-tighter">
+              {currentSong.title}
+            </h1>
+            <p className="text-xl md:text-2xl font-serif italic text-[#C8A96B] opacity-60">
+              {currentSong.artist}
+            </p>
+          </div>
         </header>
 
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-16 lg:gap-24">
           {/* Emotional Analysis Column */}
           <div className="lg:col-span-7 space-y-20">
             <div className="space-y-12">
-               <div className="space-y-2">
-                 <div className="text-[11px] tracking-[0.5em] uppercase text-[#C8A96B] font-bold">Resonancia emocional</div>
-                 <h3 className="text-2xl font-serif italic text-[#F3EBDD]/60 pt-4 border-t border-[#C8A96B]/10">Lo que esta pieza sostiene</h3>
+               <div className="space-y-4">
+                 <div className="micro-label">Resonancia Emocional</div>
+                 <h3 className="text-xl md:text-2xl font-serif italic text-[#F3EBDD]/30 pt-4 border-t border-[#C8A96B]/10">Lo que esta pieza sostiene</h3>
                </div>
                
                <p className="text-3xl md:text-5xl font-serif italic text-[#F3EBDD] leading-[1.3] max-w-2xl">
-                 {currentQuadrant.description}
+                 "{currentQuadrant.description}"
                </p>
             </div>
 
             <div className="space-y-12 pt-8">
-               <div className="text-[11px] tracking-[0.5em] uppercase text-[#F3EBDD]/40 font-bold">Nivel de resonancia</div>
+               <div className="micro-label opacity-40">Nivel de resonancia personal</div>
                <div className="grid grid-cols-5 md:flex md:flex-wrap gap-4">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((score) => (
                     <button
                       key={score}
                       onClick={() => setSelectedScore(score)}
-                      className={`w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center font-serif italic text-2xl transition-all duration-500 border ${selectedScore === score ? 'bg-[#C8A96B] text-[#140F12] border-[#C8A96B] shadow-[0_0_40px_rgba(200,169,107,0.4)] scale-110' : 'bg-white/[0.03] border-[#C8A96B]/10 text-[#F3EBDD] hover:border-[#C8A96B]/40 hover:bg-white/[0.06]'}`}
+                      className={`w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center font-serif italic text-2xl transition-all duration-700 border ${selectedScore === score ? 'bg-[#C8A96B] text-[#140F12] border-[#C8A96B] shadow-[0_0_40px_rgba(200,169,107,0.3)] scale-110' : 'bg-white/[0.01] border-[#C8A96B]/10 text-[#F3EBDD]/60 hover:border-[#C8A96B]/30 hover:bg-white/[0.03]'}`}
                     >
                       {score}
                     </button>
@@ -129,9 +138,9 @@ export const Test: React.FC = () => {
                    size="lg"
                    disabled={selectedScore === null} 
                    onClick={handleNext}
-                   className="min-w-[280px] bg-[#C8A96B] text-[#140F12] hover:bg-[#F3EBDD] transition-colors shadow-[0_20px_50px_rgba(200,169,107,0.15)] font-bold tracking-[0.2em] text-xs"
+                   className="min-w-[280px] bg-[#C8A96B] text-[#140F12] hover:bg-[#F3EBDD] transition-colors shadow-[0_20px_50px_rgba(200,169,107,0.15)] font-bold tracking-[0.3em] text-[10px]"
                  >
-                   CONTINUAR
+                   REGISTRAR EMOCIÓN
                  </Button>
                </div>
             </div>
@@ -139,7 +148,7 @@ export const Test: React.FC = () => {
 
           {/* Player Column */}
           <div className="lg:col-span-5 flex flex-col gap-8">
-            <div className="relative aspect-video rounded-[40px] overflow-hidden group shadow-[0_60px_120px_-30px_rgba(0,0,0,0.9)] bg-[#140F12] ring-1 ring-[#C8A96B]/20">
+            <div className="relative aspect-video rounded-3xl overflow-hidden group shadow-[0_60px_120px_-30px_rgba(0,0,0,0.9)] bg-[#140F12] border border-[#C8A96B]/20">
                <YouTubePlayer 
                  videoId={currentSong.youtube_video_id}
                  isPlaying={isPlaying}
@@ -157,9 +166,9 @@ export const Test: React.FC = () => {
                    >
                      <button 
                        onClick={() => setIsPlaying(true)}
-                       className="w-24 h-24 bg-[#F3EBDD] rounded-full flex items-center justify-center shadow-[0_0_60px_rgba(243,235,221,0.2)] hover:scale-110 active:scale-95 transition-transform duration-300 pointer-events-auto"
+                       className="w-20 h-20 bg-[#F3EBDD] rounded-full flex items-center justify-center shadow-[0_0_60px_rgba(243,235,221,0.2)] hover:scale-110 active:scale-95 transition-transform duration-300 pointer-events-auto"
                      >
-                       <Play fill="#140F12" className="text-[#140F12] ml-1" size={32} />
+                       <Play fill="#140F12" className="text-[#140F12] ml-1" size={28} />
                      </button>
                    </motion.div>
                  )}
@@ -167,8 +176,8 @@ export const Test: React.FC = () => {
             </div>
 
             <div className="text-center md:text-left px-4">
-              <p className="text-sm font-serif italic text-[#F3EBDD]/40 tracking-wide">
-                Seleccionada para este momento de tu lectura.
+              <p className="text-[10px] tracking-[0.2em] font-serif italic text-[#F3EBDD]/40 uppercase">
+                Pieza seleccionada por el Sommelier para tu diagnóstico.
               </p>
             </div>
           </div>

@@ -34,8 +34,9 @@ export function SongDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#140F12]">
+      <div className="min-h-screen flex flex-col items-center justify-center">
         <div className="atmosphere-luxury" />
+        <div className="halo-light" />
         <Loader2 className="animate-spin text-[#C8A96B]/40" size={40} />
       </div>
     );
@@ -43,8 +44,9 @@ export function SongDetail() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#140F12] p-6 text-center">
+      <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center">
         <div className="atmosphere-luxury" />
+        <div className="halo-light" />
         <Music className="text-[#C8A96B]/20 mb-8" size={60} strokeWidth={1} />
         <p className="text-2xl font-serif italic text-[#F3EBDD]/40 max-w-md leading-relaxed">
           "{error}"
@@ -57,22 +59,29 @@ export function SongDetail() {
   if (!song) return null;
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#140F12] relative overflow-hidden">
+    <div className="min-h-screen flex flex-col relative overflow-hidden">
       <div className="atmosphere-luxury" />
       <div className="halo-light" />
 
       <main className="flex-grow w-full max-w-7xl mx-auto px-6 py-20 relative z-10">
-        <button 
+        <motion.button 
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
           onClick={() => navigate('/songs')}
-          className="flex items-center gap-4 text-[10px] tracking-[0.4em] uppercase text-[#F3EBDD]/40 hover:text-[#C8A96B] transition-colors mb-16 group"
+          className="flex items-center gap-4 micro-label hover:text-[#C8A96B] transition-colors mb-20 group"
         >
-          <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Volver a la Cava
-        </button>
+          <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> Volver a la Cava
+        </motion.button>
 
         <div className="grid lg:grid-cols-12 gap-20">
           {/* Main Info */}
           <div className="lg:col-span-12 space-y-24">
-             <header className="space-y-8 max-w-4xl">
+             <motion.header 
+               initial={{ opacity: 0, y: 20 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.6 }}
+               className="space-y-8 max-w-4xl"
+             >
                <div className="flex items-center gap-6">
                  <div className="px-4 py-1.5 rounded-full bg-[#C8A96B]/10 border border-[#C8A96B]/20 text-[10px] tracking-[0.2em] font-bold text-[#C8A96B] uppercase">
                     {song.quadrant}
@@ -80,28 +89,33 @@ export function SongDetail() {
                  {!song.is_free && <Lock size={14} className="text-[#C8A96B]/40" />}
                </div>
 
-               <h1 className="text-7xl md:text-9xl font-serif italic text-[#F3EBDD] leading-tight tracking-tighter">
+               <h1 className="text-7xl md:text-11xl font-serif italic text-[#F3EBDD] font-extralight leading-[0.85] tracking-tighter">
                  {song.title}
                </h1>
                
                <p className="text-3xl md:text-4xl font-serif italic text-[#C8A96B]/80 pt-4">
                  {song.artist}
                </p>
-             </header>
+             </motion.header>
 
-             <div className="grid lg:grid-cols-2 gap-24 py-24 border-y border-[#C8A96B]/10">
+             <motion.div 
+               initial={{ opacity: 0 }}
+               animate={{ opacity: 1 }}
+               transition={{ delay: 0.4, duration: 1.2 }}
+               className="grid lg:grid-cols-2 gap-24 py-24 border-y border-[#C8A96B]/10"
+             >
                {/* Emotional Core */}
                <div className="space-y-12">
                  <div className="space-y-4">
-                    <span className="text-[11px] tracking-[0.5em] uppercase text-[#C8A96B] font-bold">Herida Primordial</span>
-                    <h3 className="text-4xl font-serif italic text-[#F3EBDD] leading-tight">
+                    <span className="micro-label">Herida Primordial</span>
+                    <h3 className="text-3xl md:text-5xl font-serif italic text-[#F3EBDD] leading-tight">
                       {song.core_wound}
                     </h3>
                  </div>
 
                  <div className="space-y-6">
-                    <span className="text-[11px] tracking-[0.5em] uppercase text-[#F3EBDD]/40 font-bold">Tesis Emocional</span>
-                    <p className="text-2xl font-serif italic text-[#F3EBDD]/70 leading-relaxed max-w-xl">
+                    <span className="micro-label opacity-40">Tesis Emocional</span>
+                    <p className="text-xl md:text-2xl font-serif italic text-[#F3EBDD]/50 leading-relaxed max-w-xl">
                       {song.emotional_thesis}
                     </p>
                  </div>
@@ -121,13 +135,13 @@ export function SongDetail() {
                     <div className="glossy-overlay opacity-30" />
                     <Sparkles className="text-[#C8A96B]/20 absolute -top-4 -right-4" size={100} />
                     
-                    <span className="text-[11px] tracking-[0.5em] uppercase text-[#C8A96B] font-bold relative z-10">Veredicto Sommelier</span>
-                    <p className="text-3xl font-serif italic text-[#F3EBDD] leading-relaxed relative z-10">
+                    <span className="micro-label">Veredicto Sommelier</span>
+                    <p className="text-2xl md:text-3xl font-serif italic text-[#F3EBDD] leading-relaxed relative z-10">
                       "{song.sommelier_phrase}"
                     </p>
-                    <div className="h-px w-24 bg-[#C8A96B]/20 relative z-10" />
-                    <p className="text-sm font-serif italic text-[#F3EBDD]/40 relative z-10">
-                       Energía: {song.energy} · Intensidad {song.intensity}/10
+                    <div className="h-px w-24 bg-[#C8A96B]/10 relative z-10" />
+                    <p className="micro-label">
+                       Energía: {song.energy} • Intensidad {song.intensity}/10
                     </p>
                  </div>
 
@@ -146,7 +160,7 @@ export function SongDetail() {
                    )}
                  </div>
                </div>
-             </div>
+             </motion.div>
           </div>
         </div>
       </main>

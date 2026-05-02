@@ -145,8 +145,9 @@ export function SongTest() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#140F12]">
+      <div className="min-h-screen flex flex-col items-center justify-center">
         <div className="atmosphere-luxury" />
+        <div className="halo-light" />
         <Loader2 className="animate-spin text-[#C8A96B]/40" size={40} />
       </div>
     );
@@ -154,8 +155,9 @@ export function SongTest() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#140F12] text-center p-6">
+      <div className="min-h-screen flex flex-col items-center justify-center text-center p-6">
         <div className="atmosphere-luxury" />
+        <div className="halo-light" />
         <p className="text-2xl font-serif italic text-[#F3EBDD]/40 mb-8 max-w-md">"{error}"</p>
         <Button
           onClick={() => navigate(`/songs/${slug}`)}
@@ -173,7 +175,7 @@ export function SongTest() {
     const maxScore = calculateMaxScore();
 
     return (
-      <div className="min-h-screen flex flex-col bg-[#140F12] relative overflow-hidden">
+      <div className="min-h-screen flex flex-col relative overflow-hidden">
         <div className="atmosphere-luxury" />
         <div className="halo-light" />
 
@@ -185,47 +187,47 @@ export function SongTest() {
           >
             <div className="flex flex-col items-center gap-6">
               <CheckCircle2 className="text-[#C8A96B]" size={60} strokeWidth={1} />
-              <div className="space-y-2">
-                <span className="text-[10px] tracking-[0.5em] uppercase text-[#C8A96B] font-bold">
+              <div className="space-y-3">
+                <span className="text-[9px] tracking-[0.5em] uppercase text-[#C8A96B] font-bold">
                   Cata Completada
                 </span>
-                <h1 className="text-5xl md:text-6xl font-serif italic text-[#F3EBDD] tracking-tighter">
+                <h1 className="text-6xl md:text-7xl font-serif italic text-[#F3EBDD] tracking-tighter">
                   {song.title}
                 </h1>
               </div>
             </div>
 
-            <div className="glass p-12 space-y-10 relative overflow-hidden bg-[#C8A96B]/[0.02]">
+            <div className="glass p-12 space-y-12 relative overflow-hidden bg-[#C8A96B]/[0.02]">
               <div className="glossy-overlay opacity-30" />
               <Sparkles className="text-[#C8A96B]/20 absolute -top-10 -right-10" size={200} />
 
               <div className="space-y-4">
-                <span className="text-[11px] tracking-[0.5em] uppercase text-[#F3EBDD]/40 font-bold">
+                <span className="text-[10px] tracking-[0.4em] uppercase text-[#F3EBDD]/40 font-bold">
                   Intensidad Emocional Detectada
                 </span>
-                <div className="text-7xl font-serif italic text-[#C8A96B]">{totalScore}</div>
-                <div className="text-[10px] tracking-[0.2em] uppercase text-[#F3EBDD]/20 font-bold">
-                  Sobre un total de {maxScore} unidades
+                <div className="text-8xl font-serif italic text-[#C8A96B]">{totalScore}</div>
+                <div className="text-[9px] tracking-[0.2em] uppercase text-[#F3EBDD]/20 font-bold">
+                  Potencial absoluto sobre {maxScore} puntos
                 </div>
               </div>
 
-              <div className="h-px w-full bg-white/5" />
+              <div className="h-px w-full bg-[#C8A96B]/10" />
 
-              <div className="space-y-6 text-left">
-                <div className="space-y-2">
-                  <span className="text-[10px] tracking-[0.3em] uppercase text-[#C8A96B] font-bold">
-                    Lectura Sommelier
+              <div className="space-y-10 text-left">
+                <div className="space-y-3">
+                  <span className="text-[9px] tracking-[0.3em] uppercase text-[#C8A96B] font-bold">
+                    Veredicto Sommelier
                   </span>
-                  <p className="text-xl font-serif italic text-[#F3EBDD]/80 leading-relaxed">
+                  <p className="text-2xl font-serif italic text-[#F3EBDD] leading-relaxed">
                     "{song.sommelier_phrase}"
                   </p>
                 </div>
 
                 <div className="space-y-2">
-                  <span className="text-[10px] tracking-[0.3em] uppercase text-[#F3EBDD]/40 font-bold">
+                  <span className="text-[9px] tracking-[0.3em] uppercase text-[#F3EBDD]/40 font-bold">
                     Herida Primordial
                   </span>
-                  <p className="text-[#F3EBDD]/60 font-serif italic">
+                  <p className="text-lg text-[#F3EBDD]/60 font-serif italic">
                     {song.core_wound}
                   </p>
                 </div>
@@ -234,7 +236,7 @@ export function SongTest() {
 
             <Button
               onClick={() => navigate('/library')}
-              className="w-full bg-[#C8A96B] text-[#140F12] font-bold tracking-[0.3em] text-[10px]"
+              className="w-full bg-[#C8A96B] text-[#140F12] font-bold tracking-[0.4em] text-[10px] py-10"
             >
               VOLVER A LA CAVA
             </Button>
@@ -249,7 +251,7 @@ export function SongTest() {
   const selectedAnswer = currentQuestion ? answers[currentQuestion.id] : undefined;
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#140F12] relative overflow-hidden text-[#F3EBDD]">
+    <div className="min-h-screen flex flex-col relative overflow-hidden text-[#F3EBDD]">
       <div className="atmosphere-luxury" />
       <div className="halo-light" />
 
